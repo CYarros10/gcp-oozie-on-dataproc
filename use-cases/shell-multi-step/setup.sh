@@ -1,4 +1,4 @@
-export USE_CASE=gcloud_submit
+export USE_CASE=shell-multi-step
 export CLUSTER=bq-export-sandbox-dp-cluster-oozie-2
 export HOST_NAME=$CLUSTER-m
 export PORT=11000
@@ -9,9 +9,11 @@ mkdir ~/oozie
 mkdir ~/oozie/apps 
 mkdir ~/oozie/apps/$USE_CASE
 mkdir ~/oozie/apps/$USE_CASE/scripts
-cp ~/$USE_CASE/workflow.xml ~/oozie/apps/$USE_CASE/workflow.xml
-cp ~/$USE_CASE/scripts/* ~/oozie/apps/$USE_CASE/scripts/
-cp ~/$USE_CASE/job.properties.template ~/oozie/apps/$USE_CASE/job.properties
+
+cp ~/gcp-oozie-on-dataproc/use-cases/$USE_CASE/workflow.xml ~/oozie/apps/$USE_CASE/workflow.xml
+cp ~/gcp-oozie-on-dataproc/use-cases/$USE_CASE/scripts/* ~/oozie/apps/$USE_CASE/scripts/
+cp ~/gcp-oozie-on-dataproc/use-cases/$USE_CASE/job.properties.template ~/oozie/apps/$USE_CASE/job.properties
+
 sed -i "s|%%HOST_NAME%%|$HOST_NAME|g" ~/oozie/apps/$USE_CASE/job.properties
 sed -i "s|%%USE_CASE%%|$USE_CASE|g" ~/oozie/apps/$USE_CASE/job.properties
 sed -i "s|%%SCRIPT%%|$SCRIPT|g" ~/oozie/apps/$USE_CASE/job.properties
